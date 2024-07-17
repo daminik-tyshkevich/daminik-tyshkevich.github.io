@@ -23,7 +23,7 @@ function generate_questions(number_of_questions)
 
 function choose_questions(number)
 {
-    let chosen_numbers = new String;
+    chosen_numbers = new String;
     while (array_chosen_questions.length < number)
     {
         let question = GRI(array_of_questions.length);
@@ -36,11 +36,6 @@ function choose_questions(number)
     answered_questions = new Array(chosen_numbers.length).fill(0);
 }
 
-function rewrite_chosen_questions()
-{
-    for (let i = 0; i < chosen_numbers.length; i++)
-        array_chosen_questions[i] = array_of_questions[i];
-}
 function formate_question(question_unformated)
 {
     let question_formated = {question:"", true_false:"", answer_true:"", answer_false:""};
@@ -71,7 +66,7 @@ function display_questions()
     let question_false_button;
     let question_answer;
 
-    for (let i=0; i<array_of_questions.length; i++)
+    for (let i=0; i<array_chosen_questions.length; i++)
     {
         question_div = document.createElement("div");
         question_div.id = "question_div_"+(i+1);
@@ -104,10 +99,37 @@ function display_questions()
     }
 }
 
+function rewrite_chosen_questions()
+{
+    console.log(chosen_numbers);
+    for (let i = 0; i < chosen_numbers.length; i++)
+    {
+        array_chosen_questions[i] = array_of_questions[parseInt(chosen_numbers[i])];
+        console.log(array_of_questions[parseInt(chosen_numbers[i])]);
+        console.log(array_chosen_questions[i]);
+    }
+}
+
 function rewrite_questions()
 {
     for (let i = 0; i < chosen_numbers.length; i++)
     {
-        document.getElement
+        document.getElementById("question_text_"+(i+1)).innerHTML = array_chosen_questions[i].question;
+        document.getElementById("question_true_button_"+(i+1)).innerHTML = "";
+        document.getElementById("question_false_button_"+(i+1)).innerHTML = "";
+        if (answered_questions[i] != 0)
+            switch (answered_questions[i])
+            {
+                case 1:
+                {
+                    document.getElementById("question_answer_"+(i+1)).innerHTML = array_chosen_questions[i].answer_true;
+                    break;
+                }
+                case 2:
+                {
+                    document.getElementById("question_answer_"+(i+1)).innerHTML = array_chosen_questions[i].answer_false;
+                    break;
+                }
+            }
     }
 }

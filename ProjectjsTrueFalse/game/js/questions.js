@@ -1,7 +1,7 @@
 var array_of_questions_unformated;
 var array_of_questions = new Array;
 var array_chosen_questions = new Array;
-var chosen_numbers = new String;
+var chosen_numbers = new Array;
 var answered_questions;
 function generate_questions(number_of_questions)
 {
@@ -23,14 +23,14 @@ function generate_questions(number_of_questions)
 
 function choose_questions(number)
 {
-    chosen_numbers = new String;
     while (array_chosen_questions.length < number)
     {
         let question = GRI(array_of_questions.length);
-        if (!chosen_numbers.includes(question.toString()))
+        if (!chosen_numbers.find(question))
         {
             array_chosen_questions.push(array_of_questions[question]);
-            chosen_numbers+=question.toString();
+            chosen_numbers.push(question);
+            console.log(chosen_numbers.find(question)+question);
         }
     }
     answered_questions = new Array(chosen_numbers.length).fill(0);
@@ -81,6 +81,7 @@ function display_questions()
             question_true_button = document.createElement("button");
             question_true_button.className = "true_question_button";
             question_true_button.id = "question_true_button_"+(i+1);
+            question_true_button.addEventListener('click', function(){alert(this.id.substring(this.id.lastIndexOf('_')+1)+"text")});
             question_buttons.appendChild(question_true_button);
 
             question_false_button = document.createElement("button");
@@ -99,21 +100,12 @@ function display_questions()
     }
 }
 
-function rewrite_chosen_questions()
-{
-    console.log(chosen_numbers);
-    for (let i = 0; i < chosen_numbers.length; i++)
-    {
-        array_chosen_questions[i] = array_of_questions[parseInt(chosen_numbers[i])];
-        console.log(array_of_questions[parseInt(chosen_numbers[i])]);
-        console.log(array_chosen_questions[i]);
-    }
-}
 
 function rewrite_questions()
 {
     for (let i = 0; i < chosen_numbers.length; i++)
     {
+        array_chosen_questions[i] = array_of_questions[chosen_numbers[i]];
         document.getElementById("question_text_"+(i+1)).innerHTML = array_chosen_questions[i].question;
         document.getElementById("question_true_button_"+(i+1)).innerHTML = "";
         document.getElementById("question_false_button_"+(i+1)).innerHTML = "";

@@ -3,9 +3,18 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     text-align: center;
-    background-image: url('background.jpg');
+    /*background-image: url('background.jpg');*/
     background-size: cover;
     color: black;
+}
+.true_question_button{
+    background-color:#44ff66;
+}
+.false_question_button{
+    background-color:#ff3344;
+}
+.question_buttons{
+    justify-content: space-between;
 }
 .langselect {
 	position:absolute;

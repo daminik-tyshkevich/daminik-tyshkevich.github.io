@@ -32,6 +32,10 @@ function langchange()
 			document.getElementById("title").innerHTML = language_array[0];
 			document.getElementById("lang_change").innerHTML = language_array[1];
 			document.getElementById("title_body").innerHTML = language_array[2];
+			Array.prototype.filter.call(
+				document.getElementsByClassName("true_question_button"), (button_true) => button_true.innerHTML = language_array[3]);
+			Array.prototype.filter.call(
+				document.getElementsByClassName("false_question_button"), (button_false) => button_false.innerHTML = language_array[4]);
 		} else {
 			console.log('Error language read');
 		}

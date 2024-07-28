@@ -3,7 +3,7 @@ var answered_questions_number = 0;
 var correct_answers = 0;
 window.onload=function(){
   Lang = window.location.href.split('=')[1];
-  if (!sessionStorage.getItem("chosen_questions"))
+  if (!((sessionStorage.getItem("chosen_questions")) && (sessionStorage.getItem("answered_questions"))))
   {
     generate_questions(quest_number, 0);
     langload();
@@ -13,9 +13,9 @@ window.onload=function(){
     generate_questions(quest_number, 1);
     langload();
   }
+  
   document.getElementById("lang_change").addEventListener('click', function(){
         switch(Lang){case 'by':{Lang='ru'; break;}case 'ru': {Lang = 'by'; break;}};
-        sessionStorage.setItem("answered_questions", answered_questions);
         window.location.href=window.location.href.split('=')[0]+'='+Lang;
   });
   document.getElementById("restart_button").addEventListener('click', function(){
@@ -37,6 +37,7 @@ function answer(question_number, pressed_key)
         writing_by_letter(document.getElementById("question_answer_"+(question_number+1)), array_chosen_questions[question_number].answer_true);
         //document.getElementById("question_answer_"+(question_number+1)).innerHTML=array_chosen_questions[question_number].answer_true;
         answered_questions[question_number] = pressed_key;
+        sessionStorage.setItem("answered_questions", answered_questions);
         if(array_chosen_questions[question_number].true_false == (pressed_key-1))
         {
           document.getElementById("question_div_"+(question_number+1)).style.borderColor = "green";
@@ -53,6 +54,7 @@ function answer(question_number, pressed_key)
         writing_by_letter(document.getElementById("question_answer_"+(question_number+1)), array_chosen_questions[question_number].answer_false);
         //document.getElementById("question_answer_"+(question_number+1)).innerHTML=array_chosen_questions[question_number].answer_false;
         answered_questions[question_number] = pressed_key;
+        sessionStorage.setItem("answered_questions", answered_questions);
         if(array_chosen_questions[question_number].true_false == (pressed_key-1))
         {
           document.getElementById("question_div_"+(question_number+1)).style.borderColor = "green";

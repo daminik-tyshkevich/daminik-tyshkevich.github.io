@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     /*background-image: url('background.jpg');*/
+    background-color:#dfdfdf;
     background-size: cover;
     color: black;
 }
